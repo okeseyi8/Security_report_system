@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
-import BackgroudSlideshow from "../features/backgroudSlideshow";
+import BackgroudSlideshow from "../features/BackgroudSlideshow";
 import SignUp from "../components/SignUp";
 import Login from "../components/Login";
 import PublicRoute from "../router/PublicRoute";
