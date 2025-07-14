@@ -17,11 +17,11 @@ export const useAuthStore = create((set) => ({
     ? JSON.parse(localStorage.getItem("listOfUnits"))
     : [],
 
-  login: async (serviceNumber, password) => {
+  login: async (details) => {
     set({ loading: true, error: null });
 
     try {
-      const data = await loginUser({ serviceNumber, password });
+      const data = await loginUser(details);
 
       set({ token: data.token });
       localStorage.setItem("authToken", data.token);
@@ -37,7 +37,7 @@ export const useAuthStore = create((set) => ({
       set({ loading: false });
     }
   },
-  register: async (name, password, serviceNumber, unitId) => {
+  register: async (name, password, serviceNumber, unitId, userType ) => {
     set({ loading: true, error: null });
     try {
       const data = await registerUser({
@@ -45,6 +45,8 @@ export const useAuthStore = create((set) => ({
         password,
         serviceNumber,
         unitId,
+        userType
+
       });
       toast.success("User Successfully Registered");
       set({ showForm: false });
@@ -57,6 +59,7 @@ export const useAuthStore = create((set) => ({
   },
   logout: () => {
     localStorage.clear();
+    set({token: null})
  
   },
   selectUnit: async () => {

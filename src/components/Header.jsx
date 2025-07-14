@@ -4,7 +4,7 @@ import { useAuthStore } from "../store/useAuthStore";
 const Header = () => {
   const showForm =  useAuthStore((state) => state.showForm)
   const setShowForm = useAuthStore((state) => state.setShowForm)
-  console.log(showForm)
+  console.log("hi", showForm)
   return (
     <div className="w-full px-[60px] py-5 flex justify-between items-center bg-transparent">
       <div>
@@ -17,6 +17,7 @@ const Header = () => {
             <button className="cursor-pointer" onClick={() => setShowForm(false)}>Login</button>
            {showForm}
           </li>
+          {/* when showForm is true it shows Register */}
           <li><button className="cursor-pointer" onClick={() => setShowForm(true)}>Register</button></li>
         </ul>
       </div>

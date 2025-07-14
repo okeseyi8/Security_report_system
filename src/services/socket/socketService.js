@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 let socket = null;
 let reportHandler = null;
 let onReportCallback = null;
-
+let onSuccessReportCallback = null;
 export const initSocket = (token) => {
   if (!socket) {
     socket = io("https://criminal-fonj.onrender.com/", {
@@ -57,18 +57,40 @@ export const disconnectSocket = () => {
 };
 
 
-export const emitReport = (payload) => {
-  
+
+export const emitReport = (payload, onAck) => {
   if (socket && socket.connected) {
-    console.log("Emitting report:", payload);
+    console.log("📤 Emitting report:", payload);
 
-    socket.emit("send_report", payload)
-    console.log("EMITTED!!", socket.id, socket?.connected)
+    socket.emit("send_report", payload, (ack) => {
+      console.log("Server acknowledged emit with:", ack);
+      
+    });
   } else {
-    console.log("Socket not connected. Cannot emit report.");
-
+    console.log(" Socket not connected. Cannot emit report.");
+   
   }
 };
+export const successReport = (cb) => {
+  if (!socket) {
+    console.warn("Socket not initialized. Cannot listen for success_response.");
+    return;
+  }
+
+  if (onSuccessReportCallback) {
+    socket.off("success_response", onSuccessReportCallback);
+  }
+
+  onSuccessReportCallback = (data) => {
+    console.log("🎉 success_response received:", data);
+    if (typeof cb === "function") {
+      cb(data);
+    }
+  };
+
+  socket.on("success_response", onSuccessReportCallback);
+};
+
 
 
 

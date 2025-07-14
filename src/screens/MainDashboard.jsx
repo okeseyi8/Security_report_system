@@ -44,7 +44,7 @@ const MainDashboard = () => {
         <div>
           <ul className="flex text-[#8a949e] items-center text-[23px] gap-6">
             <li>
-              <IoNotifications className="" />
+              {/* <IoNotifications className="" /> */}
             </li>
             <li>
               <FaClock />
