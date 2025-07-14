@@ -27,12 +27,12 @@ const Login = () => {
         <h1 className="mt-[42px] text-center font-semibold text-[36px]">
           Login
         </h1>
-        <div className="flex gap-3 text-md text-gray-500 font-light justify-center items-center ">
+        {/* <div className="flex gap-3 text-md text-gray-500 font-light justify-center items-center ">
           <hr className="w-16 border-t border-gray-300 rounded-full" />
           <span className=" tracking-wide text-sm text-gray-400">as</span>
           <hr className="w-16 border-t border-gray-300 rounded-full" />
-        </div>
-        <div className="flex justify-center  items-center">
+        </div> */}
+        {/* <div className="flex justify-center  items-center">
           <div className="flex flex-col items-center mx-4 my-2">
             <span
               onClick={() => setUserRole("civilian")}
@@ -63,7 +63,7 @@ const Login = () => {
             <span>Miltary</span>
           </div>
           <div></div>
-        </div>
+        </div> */}
         <form className="flex flex-col px-10 gap-3">
           <label className="text-[14px]" htmlFor="Name">
             Service Number

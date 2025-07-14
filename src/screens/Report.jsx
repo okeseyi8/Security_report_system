@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { toast } from 'react-hot-toast';
+import { toast } from "react-hot-toast";
 import { FaClock } from "react-icons/fa6";
 import { RiPoliceBadgeFill } from "react-icons/ri";
 import { IoNotifications } from "react-icons/io5";
@@ -14,7 +14,10 @@ const Report = () => {
   const user = useAuthStore((s) => s.user);
   const connectSocket = useSocketStore((state) => state.connectSocket);
   const emitReportMsg = useSocketStore((state) => state.emitReportMsg);
-  const   lastSuccessResponse = useSocketStore((state) => state.lastSuccessResponse);
+  const lastSuccessResponse = useSocketStore(
+    (state) => state.lastSuccessResponse
+  );
+  const getAllUnits = useDashboardStore((state) => state.getAllUnits);
   const reports = useSocketStore((state) => state.reports);
   const units = useDashboardStore((state) => state.units);
   const isSending = useSocketStore((state) => state.isSending);
@@ -32,15 +35,15 @@ const Report = () => {
     const allIds = filteredUnits.map((rp) => rp._id);
 
     if (selectedRecipients.length === allIds.length) {
- 
       setSelectedRecipients([]);
     } else {
- 
       setSelectedRecipients(allIds);
     }
   };
   console.log("Hi Recipient:", selectedRecipients);
+  useEffect(() =>  { getAllUnits()}, [])
   useEffect(() => {
+  
     if (roleFilter === "All" || !roleFilter) {
       setFilteredUnits(units);
     } else {
@@ -64,20 +67,17 @@ const Report = () => {
       report: report,
     });
     if (lastSuccessResponse) {
-      toast.success(`Report succeeded: ${lastSuccessResponse || 'Success'}`);
+      toast.success(`Report succeeded: ${lastSuccessResponse || "Success"}`);
     }
-    
   };
-  
-  const roles = ["All", "Floor Member", "Unit Commander", "Brigade Commander"];
-  const [selectedRoles, setSelectedRoles] = useState([]);
 
+ 
   const toggleRole = (role) => {
     setSelectedRoles((prev) =>
       prev.includes(role) ? prev.filter((r) => r !== role) : [...prev, role]
     );
   };
-  console.log("last response: ", lastSuccessResponse)
+  console.log("last response: ", lastSuccessResponse);
   console.log("🔔 Current reports array:", reports);
   return (
     <div className="w-full p-10 bg-[#F9F7F7]">

@@ -149,7 +149,7 @@ const CriminalInfo = () => {
                   <tr className="border-b border-[#eee] text-left">
                     <th className="px-5 py-2 w-[18%]">Prisoner name</th>
                     <th className="px-5 py-2 w-[18%]">D.O.B</th>
-                    <th className="px-5 py-2 w-[24%]">Unit</th>
+                    <th className="px-5 py-2 w-[24%]">Arrested Unit</th>
                     <th className="px-5 py-2 w-[14%]">Lock Up Date</th>
                     <th className="px-5 py-2 w-[14%]">Release Day</th>
                     <th className="py-2 w-[13%]">Action</th>
